@@ -2,14 +2,14 @@ import { useMemo, useRef, useState } from "react"
 
 function App() {
   const [items, setItems] = useState([]) //init as empty array
-  const [query, setQuery] = useState("")
-  const inputRef = useRef()
+  const [query, setQuery] = useState("") //init state for search query
+  const inputRef = useRef() //new item input ref
 
-  const filteredItems = useMemo(() => {
-    return items.filter(item => {
-      return item.toLowerCase().includes(query.toLowerCase())
+  const filteredItems = useMemo(() => { //useMemo ensures that this only runs when items or query are changed
+    return items.filter(item => { //filter items
+      return item.toLowerCase().includes(query.toLowerCase()) //check if item includes query and return
     })
-  }, [items, query])
+  }, [items, query]) //parameters to monitor for change to run useMemo
 
   function onSubmit(e) { //handle submit for form
     e.preventDefault() //prevent reload
@@ -29,7 +29,7 @@ function App() {
       Search:
       <input
         value={query}
-        onChange={e => setQuery(e.target.value)}
+        onChange={e => setQuery(e.target.value)} //call state hook to set query
         type="search"
       />
       <br />
